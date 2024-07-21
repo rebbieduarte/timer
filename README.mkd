@@ -1,0 +1,76 @@
+## Timer
+
+# Resumo Detalhado do Código
+
+## Inclusão de Bibliotecas
+```c
+#include <stdio.h>
+#include <stdlib.h>  // Para a função exit
+#include <unistd.h>  // Para a função sleep
+``` 
+* stdio.h: Inclui funcionalidades básicas de entrada e saída.
+* stdlib.h: Inclui a função exit, usada para sair do programa em caso de erro.
+* unistd.h: Inclui a função sleep, usada para pausar a execução do programa por um número específico de segundos.
+
+## Função Principal (main)
+```c
+
+int main() {
+    // Declaração de variáveis para armazenar hora, minuto e segundo
+    int hour, minute, second;
+    // Atraso de 1000 milissegundos usado na função sleep
+    int d = 1000;
+
+    // Solicita ao usuário para inserir o tempo no formato hh:mm:ss
+    printf("Set time (formato hh:mm:ss): \n");
+    scanf("%d:%d:%d", &hour, &minute, &second);
+
+    // Verifica se a hora, minuto ou segundo inseridos estão fora do intervalo permitido
+    if (hour > 12 || minute >= 60 || second >= 60) {
+        printf("ERROR! Hora, minuto ou segundo fora do intervalo permitido.\n");
+        exit(0); // Sai do programa se houver erro
+    }
+
+    // Loop principal que executa indefinidamente
+    while (1) {
+        // Limpa o console para atualizar o relógio
+        system("cls");
+
+        // Imprime o relógio no formato hh:mm:ss
+        printf("CLOCK: \n");
+        printf("%02d : %02d : %02d", hour, minute, second);
+
+        // Pausa a execução do programa por 1 segundo
+        sleep(1);
+
+        // Incrementa os segundos e ajusta minutos e horas conforme necessário
+        second++;
+        if (second > 59) {
+            second = 0;
+            minute++;
+            if (minute > 59) {
+                minute = 0;
+                hour++;
+                if (hour > 12) {
+                    hour = 1;  // Reinicia as horas após 12 (formato de 12 horas)
+                }
+            }
+        }
+    }
+
+    return 0; // Retorna 0 para indicar que o programa foi concluído com sucesso
+}
+```
+
+## Descrição Detalhada:
+
+* Função int main() { ... }: Define a função principal do programa.
+* Variáveis: Declaração das variáveis hour, minute e second para armazenar o tempo inserido pelo usuário e d para o atraso em milissegundos.
+* Entrada de Dados: Solicita ao usuário que insira o tempo no formato hh:mm:ss usando scanf.
+* Validação: Verifica se o tempo inserido está dentro dos limites válidos (hora <= 12, minuto e segundo < 60). Se não estiver, exibe uma mensagem de erro e sai do programa usando exit(0).
+* Loop Principal (while (1) { ... }): Executa indefinidamente para simular um relógio em tempo real.
+* Limpeza do Console: Usa system("cls") para limpar o console antes de atualizar o relógio, garantindo que o relógio seja exibido em um local fixo na tela.
+* Impressão do Relógio: Imprime o relógio no formato CLOCK: hh : mm : ss.
+* Pausa entre Atualizações: Usa sleep(1) para pausar a execução do programa por 1 segundo antes de atualizar o relógio.
+* Incremento dos Segundos: Incrementa os segundos e ajusta minutos e horas conforme necessário. Reinicia as horas para 1 após 12 no formato de 12 horas.
+* Retorno: Retorna 0 para indicar que o programa foi concluído com sucesso após o loop principal (embora o programa nunca saia do loop, isso é uma prática comum para indicar sucesso).

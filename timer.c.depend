@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1721540550 source:c:\users\duart\desktop\workspace\c#\c projects\timer.c\main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
